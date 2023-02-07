@@ -1,0 +1,15 @@
+Sub PasteSpecialuser()
+
+'PasteSpecial Macro
+
+'Paste the contents of the clipboard as a special
+
+Selection.Copy
+ActiveCell.Select
+Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+
+ Application.CutCopyMode = False
+
+End Sub
+
