@@ -1,0 +1,7 @@
+Sub copy_paste()
+
+Sheet1.select
+Range("A1:F11").Select
+Selection.Copy
+
+End sub
