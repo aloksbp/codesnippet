@@ -1,0 +1,18 @@
+Sub EditHeadersAndFooters()
+
+Dim i As Long
+
+For i = 1 To ActiveDocument.Sections.Count
+    With ActiveDocument.Sections(i)
+        .Headers(wdHeaderFooterPrimary).Range.Text = "SHRI RAM SCHOOL AT VASANT VIHAR"
+        .Headers(wdHeaderFooterPrimary).Range.Font.Name = "Arial"
+        .Headers(wdHeaderFooterPrimary).Range.Font.Size = 10
+        .Footers(wdHeaderFooterPrimary).Range.Text = "MKGES/ " & Format(Now, "dd/MM/yy")
+        .Footers(wdHeaderFooterPrimary).Range.ParagraphFormat.Alignment = wdAlignParagraphRight
+       
+        
+    End With
+Next
+
+End Sub
+
