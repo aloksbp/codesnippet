@@ -1,0 +1,64 @@
+Sub ArrangePicturesInWord()
+    Dim wdApp As Object 'Word.Application
+    Dim wdDoc As Object 'Word.Document
+    Dim wdSelection As Object 'Word.Selection
+    Dim strFolder As String
+    Dim strFile As String
+    Dim picShape As Object 'Word.Shape
+    Dim picLeft As Double
+    Dim picTop As Double
+    Dim picWidth As Double
+    Dim picHeight As Double
+    Dim counter As Integer
+    
+    ' Specify the folder path containing the pictures
+    strFolder = "C:\Users\alok.MKG\Desktop\pics"
+    
+    ' Create a new Word document
+    Set wdApp = CreateObject("Word.Application")
+    Set wdDoc = wdApp.Documents.Add
+    
+    ' Set the initial position for arranging the pictures
+    picLeft = 20
+    picTop = 20
+    picWidth = 200
+    picHeight = 200
+    
+    ' Loop through all the files in the folder
+    strFile = Dir(strFolder & "\*.jpg") ' Modify the file extension if needed
+    
+    While strFile <> ""
+        ' Insert the picture into the Word document
+        Set wdSelection = wdDoc.Range
+        Set picShape = wdSelection.InlineShapes.AddPicture(strFolder & "\" & strFile)
+        
+        ' Set the position and size of the picture
+        picShape.LockAspectRatio = msoFalse
+        picLeft = picLeft + 50
+        picTop = picTop + 50
+        picWidth = picWidth + 50
+        picHeight = picHeight + 50
+
+        
+        ' Update the position for the next picture
+        picLeft = picLeft + picWidth + 20
+        counter = counter + 1
+        
+        ' Move to the next file
+        strFile = Dir
+    Wend
+    
+    ' Save and close the Word document
+    wdDoc.SaveAs "C:\Users\alok.MKG\Desktop\pics\combineimg.docx" ' Specify the output file path
+    wdDoc.Close
+    
+    ' Clean up the objects
+    Set picShape = Nothing
+    Set wdSelection = Nothing
+    Set wdDoc = Nothing
+    wdApp.Quit
+    Set wdApp = Nothing
+    
+    MsgBox counter & " pictures arranged in Word document.", vbInformation
+End Sub
+
